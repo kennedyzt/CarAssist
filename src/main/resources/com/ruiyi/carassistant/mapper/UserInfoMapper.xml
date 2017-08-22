@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.UserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.UserInfo">
+		<id column="userID" property="userID" jdbcType="INTEGER" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="userName" property="userName" jdbcType="VARCHAR" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
+		<result column="user_type" property="userType" jdbcType="INTEGER" />
+		<result column="point" property="point" jdbcType="INTEGER" />
+		<result column="token" property="token" jdbcType="INTEGER" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="userHeadUrl" property="userHeadUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		userID, phone, userName, Email, login_name,user_type,
+		point, token,
+		password,
+		userHeadUrl,create_date,update_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from userinfo
+		where userID = #{userID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		userinfo
+		where userID = #{userID,jdbcType=INTEGER}
+	</delete>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.UserInfo">
+		update userinfo
+		<set>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				userName = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				Email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="point != null">
+				point = #{point,jdbcType=INTEGER},
+			</if>
+			<if test="token != null">
+				token = #{token,jdbcType=INTEGER},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userHeadUrl != null">
+				userHeadUrl = #{userHeadUrl,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where userID = #{userID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.UserInfo">
+		update userinfo
+		set phone = #{phone,jdbcType=VARCHAR},
+		userName =
+		#{userName,jdbcType=VARCHAR},
+		Email = #{email,jdbcType=VARCHAR},
+		wechat_id = #{wechatId,jdbcType=VARCHAR},
+		point =
+		#{point,jdbcType=INTEGER},
+		token = #{token,jdbcType=INTEGER},
+		password =
+		#{password,jdbcType=VARCHAR},
+		userHeadUrl =
+		#{userHeadUrl,jdbcType=VARCHAR},
+		update_date=now()
+		where userID =
+		#{userID,jdbcType=INTEGER}
+	</update>
+	<select id="getUserIDByParams" parameterType="map" resultType="long">
+		select userID from userinfo
+		<where>
+			<if test="phone!=null and phone !=''">
+				and phone =#{phone}
+			</if>
+			<if test="loginName != null and loginName !=''">
+				and login_name =#{loginName}
+			</if>
+			<if test="userType != null and userType != ''">
+				and user_type =#{userType}
+			</if>
+		</where>
+	</select>
+	<insert id="register" parameterType="map" useGeneratedKeys="true"
+		keyProperty="userID">
+		insert into
+		userinfo(phone,password,token,userName,login_name,user_type,userHeadUrl,create_date)
+		values
+		(#{phone},#{password},#{token},#{userName},#{loginName},#{userType},#{userHeadUrl},now())
+	</insert>
+	<select id="getUserInfoByParams" parameterType="map" resultType="map">
+		select userID,token,userHeadUrl,userName,phone,
+		login_name
+		loginName,user_type userType,password
+		from userinfo
+		<where>
+			<if test="phone != null and phone !=''">
+				and phone =#{phone}
+			</if>
+			<if test="password != null and password != ''">
+				and password = #{password}
+			</if>
+			<if test="userID != null and userID != ''">
+				and userID =#{userID}
+			</if>
+			<if test="loginName != null and loginName !=''">
+				and login_name =#{loginName}
+			</if>
+			<if test="userType != null and userType != ''">
+				and user_type =#{userType}
+			</if>
+		</where>
+	</select>
+	<update id="updateToken" parameterType="map">
+		update userinfo set token
+		= #{token} where userID = #{userID}
+	</update>
+	<select id="findTokenByUserID" parameterType="string"
+		resultType="string">
+		select token from userinfo where userID = #{userID}
+	</select>
+	<update id="updateUserInfoByPhone" parameterType="map">
+		update userinfo
+		<set>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				userName = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				Email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="point != null">
+				point = #{point,jdbcType=INTEGER},
+			</if>
+			<if test="token != null">
+				token = #{token,jdbcType=INTEGER},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userHeadUrl != null">
+				userHeadUrl = #{userHeadUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null and loginName !=''">
+				login_name =#{loginName},
+			</if>
+			<if test="userType != null and userType != ''">
+				user_type =#{userType},
+			</if>
+			update_date=now()
+		</set>
+		where
+		phone = #{phone,jdbcType=INTEGER}
+	</update>
+</mapper>

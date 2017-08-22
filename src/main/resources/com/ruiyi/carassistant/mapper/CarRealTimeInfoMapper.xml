@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.CarRealTimeInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.CarRealTimeInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="SimCode" property="simCode" jdbcType="VARCHAR" />
+    <result column="fireState" property="fireState" jdbcType="VARCHAR" />
+    <result column="curTime" property="curTime" jdbcType="TIMESTAMP" />
+    <result column="userID" property="userID" jdbcType="INTEGER" />
+    <result column="voltage" property="voltage" jdbcType="REAL" />
+    <result column="RMP" property="RMP" jdbcType="INTEGER" />
+    <result column="warterTemp" property="warterTemp" jdbcType="REAL" />
+    <result column="speed" property="speed" jdbcType="INTEGER" />
+    <result column="driveTime" property="driveTime" jdbcType="REAL" />
+    <result column="driveDistance" property="driveDistance" jdbcType="REAL" />
+    <result column="CurConsume" property="curConsume" jdbcType="REAL" />
+    <result column="AccConsume" property="accConsume" jdbcType="REAL" />
+    <result column="oilLeft" property="oilLeft" jdbcType="REAL" />
+    <result column="driveDuration" property="driveDuration" jdbcType="INTEGER" />
+    <result column="engine_load" property="engine_load" jdbcType="REAL" />
+    <result column="avgSpeed" property="avgSpeed" jdbcType="INTEGER" />
+    <result column="curTripDistance" property="curTripDistance" jdbcType="REAL" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, SimCode, fireState, curTime, userID, voltage, RMP, warterTemp, speed, driveTime, 
+    driveDistance, CurConsume, AccConsume, oilLeft, driveDuration, engine_load, avgSpeed, 
+    curTripDistance, longitude, latitude, createtime, updatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from carrealtimeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCarRealTimeInfoByUserIDAndSimCode" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from carrealtimeinfo
+    where userID = #{userID,jdbcType=INTEGER} and SimCode = #{simCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from carrealtimeinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.CarRealTimeInfo" >
+    insert into carrealtimeinfo (id, SimCode, fireState, 
+      curTime, userID, voltage, 
+      RMP, warterTemp, speed, 
+      driveTime, driveDistance, CurConsume, 
+      AccConsume, oilLeft, driveDuration, 
+      engine_load, avgSpeed, curTripDistance, 
+      longitude, latitude, createtime, 
+      updatetime)
+    values (#{id,jdbcType=INTEGER}, #{simCode,jdbcType=VARCHAR}, #{fireState,jdbcType=VARCHAR}, 
+      #{curTime,jdbcType=TIMESTAMP}, #{userID,jdbcType=INTEGER}, #{voltage,jdbcType=REAL}, 
+      #{RMP,jdbcType=INTEGER}, #{warterTemp,jdbcType=REAL}, #{speed,jdbcType=INTEGER}, 
+      #{driveTime,jdbcType=REAL}, #{driveDistance,jdbcType=REAL}, #{curConsume,jdbcType=REAL}, 
+      #{accConsume,jdbcType=REAL}, #{oilLeft,jdbcType=REAL}, #{driveDuration,jdbcType=INTEGER}, 
+      #{engine_load,jdbcType=REAL}, #{avgSpeed,jdbcType=INTEGER}, #{curTripDistance,jdbcType=REAL}, 
+      #{longitude,jdbcType=REAL}, #{latitude,jdbcType=REAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.CarRealTimeInfo" >
+    insert into carrealtimeinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="simCode != null" >
+        SimCode,
+      </if>
+      <if test="fireState != null" >
+        fireState,
+      </if>
+      <if test="curTime != null" >
+        curTime,
+      </if>
+      <if test="userID != null" >
+        userID,
+      </if>
+      <if test="voltage != null" >
+        voltage,
+      </if>
+      <if test="RMP != null" >
+        RMP,
+      </if>
+      <if test="warterTemp != null" >
+        warterTemp,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="driveTime != null" >
+        driveTime,
+      </if>
+      <if test="driveDistance != null" >
+        driveDistance,
+      </if>
+      <if test="curConsume != null" >
+        CurConsume,
+      </if>
+      <if test="accConsume != null" >
+        AccConsume,
+      </if>
+      <if test="oilLeft != null" >
+        oilLeft,
+      </if>
+      <if test="driveDuration != null" >
+        driveDuration,
+      </if>
+      <if test="engine_load != null" >
+        engine_load,
+      </if>
+      <if test="avgSpeed != null" >
+        avgSpeed,
+      </if>
+      <if test="curTripDistance != null" >
+        curTripDistance,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="simCode != null" >
+        #{simCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fireState != null" >
+        #{fireState,jdbcType=VARCHAR},
+      </if>
+      <if test="curTime != null" >
+        #{curTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userID != null" >
+        #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null" >
+        #{voltage,jdbcType=REAL},
+      </if>
+      <if test="RMP != null" >
+        #{RMP,jdbcType=INTEGER},
+      </if>
+      <if test="warterTemp != null" >
+        #{warterTemp,jdbcType=REAL},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="driveTime != null" >
+        #{driveTime,jdbcType=REAL},
+      </if>
+      <if test="driveDistance != null" >
+        #{driveDistance,jdbcType=REAL},
+      </if>
+      <if test="curConsume != null" >
+        #{curConsume,jdbcType=REAL},
+      </if>
+      <if test="accConsume != null" >
+        #{accConsume,jdbcType=REAL},
+      </if>
+      <if test="oilLeft != null" >
+        #{oilLeft,jdbcType=REAL},
+      </if>
+      <if test="driveDuration != null" >
+        #{driveDuration,jdbcType=INTEGER},
+      </if>
+      <if test="engine_load != null" >
+        #{engine_load,jdbcType=REAL},
+      </if>
+      <if test="avgSpeed != null" >
+        #{avgSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="curTripDistance != null" >
+        #{curTripDistance,jdbcType=REAL},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.CarRealTimeInfo" >
+    update carrealtimeinfo
+    <set >
+      <if test="simCode != null" >
+        SimCode = #{simCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fireState != null" >
+        fireState = #{fireState,jdbcType=VARCHAR},
+      </if>
+      <if test="curTime != null" >
+        curTime = #{curTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userID != null" >
+        userID = #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="voltage != null" >
+        voltage = #{voltage,jdbcType=REAL},
+      </if>
+      <if test="RMP != null" >
+        RMP = #{RMP,jdbcType=INTEGER},
+      </if>
+      <if test="warterTemp != null" >
+        warterTemp = #{warterTemp,jdbcType=REAL},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="driveTime != null" >
+        driveTime = #{driveTime,jdbcType=REAL},
+      </if>
+      <if test="driveDistance != null" >
+        driveDistance = #{driveDistance,jdbcType=REAL},
+      </if>
+      <if test="curConsume != null" >
+        CurConsume = #{curConsume,jdbcType=REAL},
+      </if>
+      <if test="accConsume != null" >
+        AccConsume = #{accConsume,jdbcType=REAL},
+      </if>
+      <if test="oilLeft != null" >
+        oilLeft = #{oilLeft,jdbcType=REAL},
+      </if>
+      <if test="driveDuration != null" >
+        driveDuration = #{driveDuration,jdbcType=INTEGER},
+      </if>
+      <if test="engine_load != null" >
+        engine_load = #{engine_load,jdbcType=REAL},
+      </if>
+      <if test="avgSpeed != null" >
+        avgSpeed = #{avgSpeed,jdbcType=INTEGER},
+      </if>
+      <if test="curTripDistance != null" >
+        curTripDistance = #{curTripDistance,jdbcType=REAL},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=REAL},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=REAL},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.CarRealTimeInfo" >
+    update carrealtimeinfo
+    set SimCode = #{simCode,jdbcType=VARCHAR},
+      fireState = #{fireState,jdbcType=VARCHAR},
+      curTime = #{curTime,jdbcType=TIMESTAMP},
+      userID = #{userID,jdbcType=INTEGER},
+      voltage = #{voltage,jdbcType=REAL},
+      RMP = #{RMP,jdbcType=INTEGER},
+      warterTemp = #{warterTemp,jdbcType=REAL},
+      speed = #{speed,jdbcType=INTEGER},
+      driveTime = #{driveTime,jdbcType=REAL},
+      driveDistance = #{driveDistance,jdbcType=REAL},
+      CurConsume = #{curConsume,jdbcType=REAL},
+      AccConsume = #{accConsume,jdbcType=REAL},
+      oilLeft = #{oilLeft,jdbcType=REAL},
+      driveDuration = #{driveDuration,jdbcType=INTEGER},
+      engine_load = #{engine_load,jdbcType=REAL},
+      avgSpeed = #{avgSpeed,jdbcType=INTEGER},
+      curTripDistance = #{curTripDistance,jdbcType=REAL},
+      longitude = #{longitude,jdbcType=REAL},
+      latitude = #{latitude,jdbcType=REAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

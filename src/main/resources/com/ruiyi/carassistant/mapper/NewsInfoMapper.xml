@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.NewsInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.NewsInfo" >
+    <id column="NewsID" property="newsID" jdbcType="INTEGER" />
+    <result column="NewsTitle" property="newsTitle" jdbcType="VARCHAR" />
+    <result column="NewsSummary" property="newsSummary" jdbcType="VARCHAR" />
+    <result column="Datetime" property="datetime" jdbcType="TIMESTAMP" />
+    <result column="NewsCategory" property="newsCategory" jdbcType="VARCHAR" />
+    <result column="KeyWords" property="keyWords" jdbcType="VARCHAR" />
+    <result column="PictureURL" property="pictureURL" jdbcType="VARCHAR" />
+    <result column="NewsContentURL" property="newsContentURL" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NewsID, NewsTitle, NewsSummary, Datetime, NewsCategory, KeyWords, PictureURL, NewsContentURL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from newsinfo
+    where NewsID = #{newsID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from newsinfo
+    where NewsID = #{newsID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.NewsInfo" >
+    insert into newsinfo (NewsID, NewsTitle, NewsSummary, 
+      Datetime, NewsCategory, KeyWords, 
+      PictureURL, NewsContentURL)
+    values (#{newsID,jdbcType=INTEGER}, #{newsTitle,jdbcType=VARCHAR}, #{newsSummary,jdbcType=VARCHAR}, 
+      #{datetime,jdbcType=TIMESTAMP}, #{newsCategory,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
+      #{pictureURL,jdbcType=VARCHAR}, #{newsContentURL,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.NewsInfo" >
+    insert into newsinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsID != null" >
+        NewsID,
+      </if>
+      <if test="newsTitle != null" >
+        NewsTitle,
+      </if>
+      <if test="newsSummary != null" >
+        NewsSummary,
+      </if>
+      <if test="datetime != null" >
+        Datetime,
+      </if>
+      <if test="newsCategory != null" >
+        NewsCategory,
+      </if>
+      <if test="keyWords != null" >
+        KeyWords,
+      </if>
+      <if test="pictureURL != null" >
+        PictureURL,
+      </if>
+      <if test="newsContentURL != null" >
+        NewsContentURL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsID != null" >
+        #{newsID,jdbcType=INTEGER},
+      </if>
+      <if test="newsTitle != null" >
+        #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSummary != null" >
+        #{newsSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsCategory != null" >
+        #{newsCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureURL != null" >
+        #{pictureURL,jdbcType=VARCHAR},
+      </if>
+      <if test="newsContentURL != null" >
+        #{newsContentURL,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.NewsInfo" >
+    update newsinfo
+    <set >
+      <if test="newsTitle != null" >
+        NewsTitle = #{newsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSummary != null" >
+        NewsSummary = #{newsSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null" >
+        Datetime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsCategory != null" >
+        NewsCategory = #{newsCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        KeyWords = #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureURL != null" >
+        PictureURL = #{pictureURL,jdbcType=VARCHAR},
+      </if>
+      <if test="newsContentURL != null" >
+        NewsContentURL = #{newsContentURL,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where NewsID = #{newsID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.NewsInfo" >
+    update newsinfo
+    set NewsTitle = #{newsTitle,jdbcType=VARCHAR},
+      NewsSummary = #{newsSummary,jdbcType=VARCHAR},
+      Datetime = #{datetime,jdbcType=TIMESTAMP},
+      NewsCategory = #{newsCategory,jdbcType=VARCHAR},
+      KeyWords = #{keyWords,jdbcType=VARCHAR},
+      PictureURL = #{pictureURL,jdbcType=VARCHAR},
+      NewsContentURL = #{newsContentURL,jdbcType=VARCHAR}
+    where NewsID = #{newsID,jdbcType=INTEGER}
+  </update>
+</mapper>

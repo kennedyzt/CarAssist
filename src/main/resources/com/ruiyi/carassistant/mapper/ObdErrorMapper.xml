@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.ObdErrorMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.Obderror" >
+    <id column="OBDCode" property="obdcode" jdbcType="VARCHAR" />
+    <result column="OBDChineseDesc" property="obdchinesedesc" jdbcType="VARCHAR" />
+    <result column="OBDEnglishDesc" property="obdenglishdesc" jdbcType="VARCHAR" />
+    <result column="OBDRange" property="obdrange" jdbcType="VARCHAR" />
+    <result column="OBDBackground" property="obdbackground" jdbcType="VARCHAR" />
+    <result column="OBDDeviceInfo" property="obddeviceinfo" jdbcType="VARCHAR" />
+    <result column="OBDErrorLevel" property="obderrorlevel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OBDCode, OBDChineseDesc, OBDEnglishDesc, OBDRange, OBDBackground, OBDDeviceInfo, 
+    OBDErrorLevel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from obderror
+    where OBDCode = #{obdcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from obderror
+    where OBDCode = #{obdcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.Obderror" >
+    insert into obderror (OBDCode, OBDChineseDesc, OBDEnglishDesc, 
+      OBDRange, OBDBackground, OBDDeviceInfo, 
+      OBDErrorLevel)
+    values (#{obdcode,jdbcType=VARCHAR}, #{obdchinesedesc,jdbcType=VARCHAR}, #{obdenglishdesc,jdbcType=VARCHAR}, 
+      #{obdrange,jdbcType=VARCHAR}, #{obdbackground,jdbcType=VARCHAR}, #{obddeviceinfo,jdbcType=VARCHAR}, 
+      #{obderrorlevel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.Obderror" >
+    insert into obderror
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="obdcode != null" >
+        OBDCode,
+      </if>
+      <if test="obdchinesedesc != null" >
+        OBDChineseDesc,
+      </if>
+      <if test="obdenglishdesc != null" >
+        OBDEnglishDesc,
+      </if>
+      <if test="obdrange != null" >
+        OBDRange,
+      </if>
+      <if test="obdbackground != null" >
+        OBDBackground,
+      </if>
+      <if test="obddeviceinfo != null" >
+        OBDDeviceInfo,
+      </if>
+      <if test="obderrorlevel != null" >
+        OBDErrorLevel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="obdcode != null" >
+        #{obdcode,jdbcType=VARCHAR},
+      </if>
+      <if test="obdchinesedesc != null" >
+        #{obdchinesedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="obdenglishdesc != null" >
+        #{obdenglishdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="obdrange != null" >
+        #{obdrange,jdbcType=VARCHAR},
+      </if>
+      <if test="obdbackground != null" >
+        #{obdbackground,jdbcType=VARCHAR},
+      </if>
+      <if test="obddeviceinfo != null" >
+        #{obddeviceinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="obderrorlevel != null" >
+        #{obderrorlevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.Obderror" >
+    update obderror
+    <set >
+      <if test="obdchinesedesc != null" >
+        OBDChineseDesc = #{obdchinesedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="obdenglishdesc != null" >
+        OBDEnglishDesc = #{obdenglishdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="obdrange != null" >
+        OBDRange = #{obdrange,jdbcType=VARCHAR},
+      </if>
+      <if test="obdbackground != null" >
+        OBDBackground = #{obdbackground,jdbcType=VARCHAR},
+      </if>
+      <if test="obddeviceinfo != null" >
+        OBDDeviceInfo = #{obddeviceinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="obderrorlevel != null" >
+        OBDErrorLevel = #{obderrorlevel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OBDCode = #{obdcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.Obderror" >
+    update obderror
+    set OBDChineseDesc = #{obdchinesedesc,jdbcType=VARCHAR},
+      OBDEnglishDesc = #{obdenglishdesc,jdbcType=VARCHAR},
+      OBDRange = #{obdrange,jdbcType=VARCHAR},
+      OBDBackground = #{obdbackground,jdbcType=VARCHAR},
+      OBDDeviceInfo = #{obddeviceinfo,jdbcType=VARCHAR},
+      OBDErrorLevel = #{obderrorlevel,jdbcType=VARCHAR}
+    where OBDCode = #{obdcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

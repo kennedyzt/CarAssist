@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.CarGlobalStateInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.CarGlobalStateInfo" >
+    <id column="SimCode" property="simCode" jdbcType="VARCHAR" />
+    <result column="userID" property="userID" jdbcType="INTEGER" />
+    <result column="allDriveTime" property="allDriveTime" jdbcType="REAL" />
+    <result column="allDriveDistance" property="allDriveDistance" jdbcType="REAL" />
+    <result column="allFuelConsume" property="allFuelConsume" jdbcType="REAL" />
+    <result column="allCost" property="allCost" jdbcType="REAL" />
+    <result column="otherInfo" property="otherInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SimCode, userID, allDriveTime, allDriveDistance, allFuelConsume, allCost, otherInfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from carglobalstateinfo
+    where SimCode = #{simCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from carglobalstateinfo
+    where SimCode = #{simCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.CarGlobalStateInfo" >
+    insert into carglobalstateinfo (SimCode, userID, allDriveTime, 
+      allDriveDistance, allFuelConsume, allCost, 
+      otherInfo)
+    values (#{simCode,jdbcType=VARCHAR}, #{userID,jdbcType=INTEGER}, #{allDriveTime,jdbcType=REAL}, 
+      #{allDriveDistance,jdbcType=REAL}, #{allFuelConsume,jdbcType=REAL}, #{allCost,jdbcType=REAL}, 
+      #{otherInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.CarGlobalStateInfo" >
+    insert into carglobalstateinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="simCode != null" >
+        SimCode,
+      </if>
+      <if test="userID != null" >
+        userID,
+      </if>
+      <if test="allDriveTime != null" >
+        allDriveTime,
+      </if>
+      <if test="allDriveDistance != null" >
+        allDriveDistance,
+      </if>
+      <if test="allFuelConsume != null" >
+        allFuelConsume,
+      </if>
+      <if test="allCost != null" >
+        allCost,
+      </if>
+      <if test="otherInfo != null" >
+        otherInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="simCode != null" >
+        #{simCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userID != null" >
+        #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="allDriveTime != null" >
+        #{allDriveTime,jdbcType=REAL},
+      </if>
+      <if test="allDriveDistance != null" >
+        #{allDriveDistance,jdbcType=REAL},
+      </if>
+      <if test="allFuelConsume != null" >
+        #{allFuelConsume,jdbcType=REAL},
+      </if>
+      <if test="allCost != null" >
+        #{allCost,jdbcType=REAL},
+      </if>
+      <if test="otherInfo != null" >
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.CarGlobalStateInfo" >
+    update carglobalstateinfo
+    <set >
+      <if test="userID != null" >
+        userID = #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="allDriveTime != null" >
+        allDriveTime = allDriveTime + #{allDriveTime,jdbcType=REAL},
+      </if>
+      <if test="allDriveDistance != null" >
+        allDriveDistance = allDriveDistance + #{allDriveDistance,jdbcType=REAL},
+      </if>
+      <if test="allFuelConsume != null" >
+        allFuelConsume = allFuelConsume + #{allFuelConsume,jdbcType=REAL},
+      </if>
+      <if test="allCost != null" >
+        allCost = allCost + #{allCost,jdbcType=REAL},
+      </if>
+      <if test="otherInfo != null" >
+        otherInfo = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SimCode = #{simCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.CarGlobalStateInfo" >
+    update carglobalstateinfo
+    set userID = #{userID,jdbcType=INTEGER},
+      allDriveTime = allDriveTime + #{allDriveTime,jdbcType=REAL},
+      allDriveDistance = allDriveDistance + #{allDriveDistance,jdbcType=REAL},
+      allFuelConsume = allFuelConsume + #{allFuelConsume,jdbcType=REAL},
+      allCost = allCost + #{allCost,jdbcType=REAL},
+      otherInfo = #{otherInfo,jdbcType=VARCHAR}
+    where SimCode = #{simCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

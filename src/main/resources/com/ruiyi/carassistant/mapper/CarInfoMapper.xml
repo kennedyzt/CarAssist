@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.CarInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.CarInfo">
+		<id column="SimCode" property="simCode" jdbcType="VARCHAR" />
+		<result column="autoBrand" property="autoBrand" jdbcType="VARCHAR" />
+		<result column="autoSubBrand" property="autoSubBrand" jdbcType="VARCHAR" />
+		<result column="userID" property="userID" jdbcType="INTEGER" />
+		<result column="carNumber" property="carNumber" jdbcType="VARCHAR" />
+		<result column="Vin" property="vin" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		SimCode, autoBrand, autoSubBrand, userID, carNumber, Vin
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from carinfo
+		where SimCode = #{simCode,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		carinfo
+		where SimCode = #{simCode,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.ruiyi.carassistant.entity.CarInfo">
+		insert into carinfo (SimCode,
+		autoBrand, autoSubBrand,
+		userID, carNumber,
+		Vin,obd_app_version,obd_version,in_use,create_date
+		)
+		values
+		(#{simCode,jdbcType=VARCHAR}, #{autoBrand,jdbcType=VARCHAR},
+		#{autoSubBrand,jdbcType=VARCHAR},
+		#{userID,jdbcType=INTEGER},
+		#{carNumber,jdbcType=VARCHAR},
+		#{vin,jdbcType=VARCHAR},#{obdAppVersion,jdbcType=VARCHAR},#{obdVersion,jdbcType=VARCHAR},true,now()
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.CarInfo">
+		insert into carinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="simCode != null">
+				SimCode,
+			</if>
+			<if test="autoBrand != null">
+				autoBrand,
+			</if>
+			<if test="autoSubBrand != null">
+				autoSubBrand,
+			</if>
+			<if test="userID != null">
+				userID,
+			</if>
+			<if test="carNumber != null">
+				carNumber,
+			</if>
+			<if test="vin != null">
+				Vin,
+			</if>
+			<if test="brandName != null">
+				brand_name,
+			</if>
+			<if test="brandLogo != null">
+				brand_logo,
+			</if>
+			<if test="seriesName != null">
+				series_name,
+			</if>
+			<if test="carType != null">
+				car_type,
+			</if>
+			<if test="obdAppVersion != null">
+				obd_app_version,
+			</if>
+			<if test="obdVersion != null">
+				obd_version,
+			</if>
+			in_use,
+			create_date
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="simCode != null">
+				#{simCode,jdbcType=VARCHAR},
+			</if>
+			<if test="autoBrand != null">
+				#{autoBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="autoSubBrand != null">
+				#{autoSubBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="userID != null">
+				#{userID,jdbcType=INTEGER},
+			</if>
+			<if test="carNumber != null">
+				#{carNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="vin != null">
+				#{vin,jdbcType=VARCHAR},
+			</if>
+			<if test="brandName != null">
+				#{brandName,jdbcType=VARCHAR},
+			</if>
+			<if test="brandLogo != null">
+				#{brandLogo,jdbcType=VARCHAR},
+			</if>
+			<if test="seriesName != null">
+				#{seriesName,jdbcType=VARCHAR},
+			</if>
+			<if test="carType != null">
+				#{carType,jdbcType=VARCHAR},
+			</if>
+			<if test="obdAppVersion != null">
+				obd_app_version = #{obdAppVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="obdVersion != null">
+				obd_version = #{obdVersion,jdbcType=VARCHAR},
+			</if>
+			true,
+			now()
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.CarInfo">
+		update carinfo
+		<set>
+			<if test="autoBrand != null">
+				autoBrand = #{autoBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="autoSubBrand != null">
+				autoSubBrand = #{autoSubBrand,jdbcType=VARCHAR},
+			</if>
+			<if test="userID != null">
+				userID = #{userID,jdbcType=INTEGER},
+			</if>
+			<if test="carNumber != null">
+				carNumber = #{carNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="vin != null">
+				Vin = #{vin,jdbcType=VARCHAR},
+			</if>
+			<if test="obdAppVersion != null">
+				obd_app_version = #{obdAppVersion,jdbcType=VARCHAR},
+			</if>
+			<if test="obdVersion != null">
+				obd_version = #{obdVersion,jdbcType=VARCHAR},
+			</if>
+			update_date=now()
+		</set>
+		where SimCode = #{simCode,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.CarInfo">
+		update carinfo
+		set
+		autoBrand = #{autoBrand,jdbcType=VARCHAR},
+		autoSubBrand =
+		#{autoSubBrand,jdbcType=VARCHAR},
+		userID = #{userID,jdbcType=INTEGER},
+		carNumber = #{carNumber,jdbcType=VARCHAR},
+		update_date=now(),
+		Vin =
+		#{vin,jdbcType=VARCHAR}
+		where SimCode = #{simCode,jdbcType=VARCHAR}
+	</update>
+	<select id="getConsumeInfo" parameterType="java.util.Map"
+		statementType="CALLABLE" resultType="java.util.Map">
+		{call
+		getConsumeInfo(
+		#{simCode},
+		#{year})
+		}
+	</select>
+	<select id="getConsumeByMonth" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		DATE_FORMAT(EndTime, '%m') month,
+		count(Consume)
+		monthConsume
+		FROM
+		travelinfo
+		WHERE
+		SimCode=#{simCode} and
+		YEAR(EndTime)=#{year}
+		group by month
+	</select>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.ExceptionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.ExceptionInfo" >
+    <id column="ExceptionInfoID" property="exceptionInfoID" jdbcType="INTEGER" />
+    <result column="SimCode" property="simCode" jdbcType="VARCHAR" />
+    <result column="userID" property="userID" jdbcType="INTEGER" />
+    <result column="ExceptionType" property="exceptionType" jdbcType="SMALLINT" />
+    <result column="ExceptionValue" property="exceptionValue" jdbcType="VARCHAR" />
+    <result column="ExceptionTime" property="exceptionTime" jdbcType="TIMESTAMP" />
+    <result column="otherInfo" property="otherInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ExceptionInfoID, SimCode, userID, ExceptionType, ExceptionValue,
+    ExceptionTime, otherInfo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from exceptioninfo
+    where ExceptionInfoID = #{exceptionInfoID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exceptioninfo
+    where ExceptionInfoID = #{exceptionInfoID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.ExceptionInfo" >
+    insert into exceptioninfo (SimCode, userID, 
+      ExceptionType, ExceptionValue,
+      ExceptionTime, otherInfo)
+    values (#{simCode,jdbcType=VARCHAR}, #{userID,jdbcType=INTEGER}, 
+      #{exceptionType,jdbcType=SMALLINT}, #{exceptionValue,jdbcType=VARCHAR},
+      #{exceptionTime,jdbcType=TIMESTAMP}, #{otherInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.ExceptionInfo" >
+    insert into exceptioninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exceptionInfoID != null" >
+        ExceptionInfoID,
+      </if>
+      <if test="simCode != null" >
+        SimCode,
+      </if>
+      <if test="userID != null" >
+        userID,
+      </if>
+      <if test="exceptionType != null" >
+        ExceptionType,
+      </if>
+      <if test="exceptionValue != null" >
+        ExceptionValue,
+      </if>
+      <if test="exceptionTime != null" >
+        ExceptionTime,
+      </if>
+      <if test="otherInfo != null" >
+        otherInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exceptionInfoID != null" >
+        #{exceptionInfoID,jdbcType=INTEGER},
+      </if>
+      <if test="simCode != null" >
+        #{simCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userID != null" >
+        #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionType != null" >
+        #{exceptionType,jdbcType=SMALLINT},
+      </if>
+      <if test="exceptionValue != null" >
+        #{exceptionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionTime != null" >
+        #{exceptionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherInfo != null" >
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.ExceptionInfo" >
+    update exceptioninfo
+    <set >
+      <if test="simCode != null" >
+        SimCode = #{simCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userID != null" >
+        userID = #{userID,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionType != null" >
+        ExceptionType = #{exceptionType,jdbcType=SMALLINT},
+      </if>
+      <if test="exceptionValue != null" >
+        ExceptionValue = #{exceptionValue,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionTime != null" >
+        ExceptionTime = #{exceptionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherInfo != null" >
+        otherInfo = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ExceptionInfoID = #{exceptionInfoID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.ExceptionInfo" >
+    update exceptioninfo
+    set SimCode = #{simCode,jdbcType=VARCHAR},
+      userID = #{userID,jdbcType=INTEGER},
+      ExceptionType = #{exceptionType,jdbcType=SMALLINT},
+      ExceptionValue = #{exceptionValue,jdbcType=VARCHAR},
+      ExceptionTime = #{exceptionTime,jdbcType=TIMESTAMP},
+      otherInfo = #{otherInfo,jdbcType=VARCHAR}
+    where ExceptionInfoID = #{exceptionInfoID,jdbcType=INTEGER}
+  </update>
+</mapper>

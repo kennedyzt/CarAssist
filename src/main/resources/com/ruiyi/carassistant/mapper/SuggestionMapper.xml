@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.SuggestionMapper">
+	<resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.Suggestion">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="userID" property="userID" jdbcType="INTEGER" />
+		<result column="msgType" property="msgType" jdbcType="SMALLINT" />
+		<result column="nickName" property="nickName" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, msg_type, nick_name, phone
+	</sql>
+	<insert id="add" parameterType="com.ruiyi.carassistant.entity.Suggestion">
+		insert into suggestion
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			user_id,
+			msg_type,
+			nick_name,
+			phone,
+			content
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userID,jdbcType=INTEGER},
+			#{msgType,jdbcType=SMALLINT},
+			#{nickName,jdbcType=VARCHAR},
+			#{phone,jdbcType=VARCHAR},
+			#{content,jdbcType=LONGVARCHAR}
+		</trim>
+	</insert>
+</mapper>

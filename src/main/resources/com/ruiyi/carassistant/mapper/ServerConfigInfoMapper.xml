@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.ServerConfigInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.ServerConfigInfo" >
+    <id column="configname" property="configname" jdbcType="VARCHAR" />
+    <result column="configvalue" property="configvalue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    configname, configvalue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from server_config_info
+    where configname = #{configname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from server_config_info
+    where configname = #{configname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.ServerConfigInfo" >
+    insert into server_config_info (configname, configvalue)
+    values (#{configname,jdbcType=VARCHAR}, #{configvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.ServerConfigInfo" >
+    insert into server_config_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="configname != null" >
+        configname,
+      </if>
+      <if test="configvalue != null" >
+        configvalue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="configname != null" >
+        #{configname,jdbcType=VARCHAR},
+      </if>
+      <if test="configvalue != null" >
+        #{configvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.ServerConfigInfo" >
+    update server_config_info
+    <set >
+      <if test="configvalue != null" >
+        configvalue = #{configvalue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where configname = #{configname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.ServerConfigInfo" >
+    update server_config_info
+    set configvalue = #{configvalue,jdbcType=VARCHAR}
+    where configname = #{configname,jdbcType=VARCHAR}
+  </update>
+  <select id="findConfigInfo" resultType="map">
+    select * from server_config_info where configname in
+    <foreach item="item" collection="array" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </select>
+</mapper>

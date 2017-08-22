@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.CarBrandInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.CarBrandInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="firstletter" property="firstletter" jdbcType="VARCHAR" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+    <result column="brand_logo" property="brandLogo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, firstletter, brandname, brand_id, brand_logo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_brand_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car_brand_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ruiyi.carassistant.entity.CarBrandInfo" >
+    insert into car_brand_info (id, firstletter, brandname, 
+      brand_id, brand_logo)
+    values (#{id,jdbcType=INTEGER}, #{firstletter,jdbcType=VARCHAR}, #{brandname,jdbcType=VARCHAR}, 
+      #{brandId,jdbcType=VARCHAR}, #{brandLogo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.CarBrandInfo" >
+    insert into car_brand_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="firstletter != null" >
+        firstletter,
+      </if>
+      <if test="brandname != null" >
+        brandname,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="brandLogo != null" >
+        brand_logo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="firstletter != null" >
+        #{firstletter,jdbcType=VARCHAR},
+      </if>
+      <if test="brandname != null" >
+        #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLogo != null" >
+        #{brandLogo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.CarBrandInfo" >
+    update car_brand_info
+    <set >
+      <if test="firstletter != null" >
+        firstletter = #{firstletter,jdbcType=VARCHAR},
+      </if>
+      <if test="brandname != null" >
+        brandname = #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=VARCHAR},
+      </if>
+      <if test="brandLogo != null" >
+        brand_logo = #{brandLogo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.CarBrandInfo" >
+    update car_brand_info
+    set firstletter = #{firstletter,jdbcType=VARCHAR},
+      brandname = #{brandname,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=VARCHAR},
+      brand_logo = #{brandLogo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

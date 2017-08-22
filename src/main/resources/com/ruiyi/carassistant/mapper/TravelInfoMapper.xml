@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiyi.carassistant.dao.TravelInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ruiyi.carassistant.entity.TravelInfo">
+		<id column="TravelInfoID" property="travelInfoID" jdbcType="INTEGER" />
+		<result column="userID" property="userID" jdbcType="INTEGER" />
+		<result column="SimCode" property="simCode" jdbcType="VARCHAR" />
+		<result column="StartLocation" property="startLocation"
+			jdbcType="VARCHAR" />
+		<result column="AvgSpeed" property="avgSpeed" jdbcType="REAL" />
+		<result column="DriveTime" property="driveTime" jdbcType="REAL" />
+		<result column="Distance" property="distance" jdbcType="REAL" />
+		<result column="Consume" property="consume" jdbcType="REAL" />
+		<result column="ConsumePerMile" property="consumePerMile"
+			jdbcType="REAL" />
+		<result column="Cost" property="cost" jdbcType="REAL" />
+		<result column="TrailStr" property="trailStr" jdbcType="VARCHAR" />
+		<result column="Grade" property="grade" jdbcType="REAL" />
+		<result column="EndLocation" property="endLocation" jdbcType="VARCHAR" />
+		<result column="TopSpeed" property="topSpeed" jdbcType="REAL" />
+		<result column="StartTime" property="startTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		TravelInfoID, userID, SimCode, StartLocation, AvgSpeed,
+		DriveTime, Distance,
+		Consume,
+		ConsumePerMile, Cost, TrailStr, Grade,
+		EndLocation, TopSpeed, StartTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from travelinfo
+		where TravelInfoID = #{travelInfoID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		travelinfo
+		where TravelInfoID = #{travelInfoID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ruiyi.carassistant.entity.TravelInfo">
+		insert into travelinfo
+		(TravelInfoID, userID, SimCode,
+		StartLocation, AvgSpeed, DriveTime,
+		Distance, Consume, ConsumePerMile,
+		Cost, TrailStr, Grade, EndLocation,
+		TopSpeed, StartTime, EndTime)
+		values (#{travelInfoID,jdbcType=INTEGER},
+		#{userID,jdbcType=INTEGER},
+		#{simCode,jdbcType=VARCHAR},
+		#{startLocation,jdbcType=VARCHAR}, #{avgSpeed,jdbcType=REAL},
+		#{driveTime,jdbcType=REAL},
+		#{distance,jdbcType=REAL},
+		#{consume,jdbcType=REAL},
+		#{consumePerMile,jdbcType=REAL},
+		#{cost,jdbcType=REAL}, #{trailStr,jdbcType=VARCHAR},
+		#{grade,jdbcType=REAL},
+		#{endLocation,jdbcType=VARCHAR},
+		#{topSpeed,jdbcType=REAL}, #{startTime,jdbcType=TIMESTAMP},
+		#{endTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ruiyi.carassistant.entity.TravelInfo"
+		useGeneratedKeys="true" keyProperty="travelInfoID">
+		insert into travelinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userID != null">
+				userID,
+			</if>
+			<if test="simCode != null">
+				SimCode,
+			</if>
+			<if test="startLocation != null">
+				StartLocation,
+			</if>
+			<if test="avgSpeed != null">
+				AvgSpeed,
+			</if>
+			<if test="driveTime != null">
+				DriveTime,
+			</if>
+			<if test="distance != null">
+				Distance,
+			</if>
+			<if test="consume != null">
+				Consume,
+			</if>
+			<if test="consumePerMile != null">
+				ConsumePerMile,
+			</if>
+			<if test="cost != null">
+				Cost,
+			</if>
+			<if test="trailStr != null">
+				TrailStr,
+			</if>
+			Grade,
+			<if test="endLocation != null">
+				EndLocation,
+			</if>
+			<if test="topSpeed != null">
+				TopSpeed,
+			</if>
+			<if test="startTime != null">
+				StartTime,
+			</if>
+			<if test="endTime != null">
+				EndTime,
+			</if>
+			createtime,
+			<if test="carState != null">
+				CarState
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userID != null">
+				#{userID,jdbcType=INTEGER},
+			</if>
+			<if test="simCode != null">
+				#{simCode,jdbcType=VARCHAR},
+			</if>
+			<if test="startLocation != null">
+				#{startLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="avgSpeed != null">
+				#{avgSpeed,jdbcType=REAL},
+			</if>
+			<if test="driveTime != null">
+				#{driveTime,jdbcType=REAL},
+			</if>
+			<if test="distance != null">
+				#{distance,jdbcType=REAL},
+			</if>
+			<if test="consume != null">
+				#{consume,jdbcType=REAL},
+			</if>
+			<if test="consumePerMile != null">
+				#{consumePerMile,jdbcType=REAL},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=REAL},
+			</if>
+			<if test="trailStr != null">
+				#{trailStr,jdbcType=VARCHAR},
+			</if>
+			100,
+			<if test="endLocation != null">
+				#{endLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="topSpeed != null">
+				#{topSpeed,jdbcType=REAL},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=REAL},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			null,
+			<if test="carState != null">
+				#{carState,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ruiyi.carassistant.entity.TravelInfo">
+		update travelinfo
+		<set>
+			<if test="userID != null">
+				userID = #{userID,jdbcType=INTEGER},
+			</if>
+			<if test="simCode != null">
+				SimCode = #{simCode,jdbcType=VARCHAR},
+			</if>
+			<if test="startLocation != null">
+				StartLocation = #{startLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="avgSpeed != null">
+				AvgSpeed = #{avgSpeed,jdbcType=REAL},
+			</if>
+			<if test="driveTime != null">
+				DriveTime =(timestampdiff(microsecond,'1970-01-01
+				00:00:00',#{endTime})-timestampdiff(microsecond,'1970-01-01
+				00:00:00',StartTime))/1000000,
+			</if>
+			<if test="distance != null">
+				Distance = #{distance,jdbcType=REAL}+Distance,
+			</if>
+			<if test="consume != null">
+				Consume = #{consume,jdbcType=REAL}+Consume,
+			</if>
+			<if test="consumePerMile != null">
+				ConsumePerMile = #{consumePerMile,jdbcType=REAL},
+			</if>
+			<if test="cost != null">
+				Cost = #{cost,jdbcType=REAL}+Cost,
+			</if>
+			<if test="trailStr != null">
+				TrailStr =IF(TrailStr is
+				NULL,#{trailStr,jdbcType=VARCHAR},CONCAT(LEFT(TrailStr,CHAR_LENGTH(TrailStr)-1),',',RIGHT(#{trailStr,jdbcType=VARCHAR},CHAR_LENGTH(#{trailStr,jdbcType=VARCHAR})-1)))
+				,
+			</if>
+			<if test="gplus != null or reduce!=null">
+				Grade =
+				if((100-(Gplus+#{gplus})-(Reduce+#{reduce})*2)>=45,100-(Gplus+#{gplus})-(Reduce+#{reduce})*2,45),
+			</if>
+			<if test="endLocation != null">
+				EndLocation = #{endLocation,jdbcType=VARCHAR},
+			</if>
+			<if test="topSpeed != null">
+				TopSpeed=if(TopSpeed&lt;#{topSpeed,jdbcType=REAL},#{topSpeed,jdbcType=REAL},TopSpeed),
+			</if>
+			<if test="startTime != null">
+				StartTime = #{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				EndTime = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="carState != null">
+				CarState = #{carState,jdbcType=VARCHAR},
+			</if>
+			<if test="gplus != null">
+				Gplus = #{gplus}+Gplus,
+			</if>
+			<if test="reduce != null">
+				Reduce = #{reduce}+Reduce,
+			</if>
+		</set>
+		where TravelInfoID = #{travelInfoID,jdbcType=INTEGER} AND userID =
+		#{userID,jdbcType=INTEGER} AND SimCode = #{simCode,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ruiyi.carassistant.entity.TravelInfo">
+		update travelinfo
+		set userID = #{userID,jdbcType=INTEGER},
+		SimCode =
+		#{simCode,jdbcType=VARCHAR},
+		StartLocation =
+		#{startLocation,jdbcType=VARCHAR},
+		AvgSpeed =
+		#{avgSpeed,jdbcType=REAL},
+		DriveTime = #{driveTime,jdbcType=REAL},
+		Distance = #{distance,jdbcType=REAL},
+		Consume =
+		#{consume,jdbcType=REAL},
+		ConsumePerMile =
+		#{consumePerMile,jdbcType=REAL},
+		Cost = #{cost,jdbcType=REAL},
+		TrailStr
+		= #{trailStr,jdbcType=VARCHAR},
+		Grade = #{grade,jdbcType=REAL},
+		EndLocation = #{endLocation,jdbcType=VARCHAR},
+		TopSpeed =
+		#{topSpeed,jdbcType=REAL},
+		StartTime = #{startTime,jdbcType=TIMESTAMP}
+		where TravelInfoID = #{travelInfoID,jdbcType=INTEGER}
+	</update>
+</mapper>
